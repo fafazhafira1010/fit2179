@@ -1,0 +1,229 @@
+/* ============================================
+   BASE & RESET
+   ============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Georgia', serif;
+  background-color: #fdf6f0;
+  color: #1a1a1a;
+  line-height: 1.7;
+}
+
+/* ============================================
+   PAGE LAYOUT
+   ============================================ */
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+}
+
+/* ============================================
+   HERO / HEADER
+   ============================================ */
+.hero {
+  text-align: center;
+  padding: 5rem 2rem 3rem;
+  border-bottom: 1px solid #e8d5c4;
+  margin-bottom: 3rem;
+}
+
+.eyebrow {
+  font-family: 'Arial', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #b5451b;
+  margin-bottom: 1rem;
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #1a1a1a;
+  margin-bottom: 1.2rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.subtitle {
+  font-size: 1.15rem;
+  color: #555;
+  max-width: 650px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ============================================
+   STORY SECTIONS
+   ============================================ */
+.section-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.section-header h2 {
+  display: inline-block;
+}
+
+.section-header p {
+  margin: 0.75rem auto 0;
+  max-width: 650px;
+}
+.story-section {
+  margin-bottom: 5rem;
+  padding-top: 2rem;
+  border-top: 2px solid #e8d5c4;
+}
+
+.story-section h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.75rem;
+}
+
+.story-section h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #b5451b;
+  margin-top: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.story-section p {
+  font-size: 1rem;
+  color: #444;
+  max-width: 750px;
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+/* ============================================
+   CHART CONTAINERS
+   ============================================ */
+.vis {
+  background: #ffffff;
+  border: 1px solid #e8d5c4;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.vis-wide {
+  width: 100%;
+}
+
+/* ============================================
+   TWO COLUMN GRID
+   ============================================ */
+.chart-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.two-column {
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 700px) {
+  .two-column {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+footer.story-section {
+  border-top: 2px solid #e8d5c4;
+  padding-top: 2rem;
+  margin-top: 4rem;
+}
+
+footer.story-section h2 {
+  margin-bottom: 1rem;
+}
+
+footer.story-section p {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 0.75rem;
+}
+
+.metadata {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e8d5c4;
+  font-family: 'Arial', sans-serif;
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.metadata p {
+  font-size: 0.85rem;
+  color: #777;
+  margin-bottom: 0.4rem;
+}
+
+.metadata strong {
+  color: #1a1a1a;
+}
+
+/* ============================================
+   CHART + IMAGE SIDE BY SIDE
+   ============================================ */
+.chart-image-row {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.chart-image-row .vis {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.side-image {
+  flex: 0 0 280px;
+  text-align: center;
+}
+
+.side-image img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 16px rgba(200, 80, 192, 0.15);
+  border: 2px solid #e8d5c4;
+}
+
+.image-caption {
+  font-family: 'Arial', sans-serif;
+  font-size: 0.8rem !important;
+  color: #999 !important;
+  font-style: italic;
+  margin-top: 0.5rem !important;
+  margin-bottom: 0 !important;
+}
+
+@media (max-width: 700px) {
+  .chart-image-row {
+    flex-direction: column;
+  }
+
+  .side-image {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+}

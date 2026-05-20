@@ -1,0 +1,88 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 700,
+  "height": 350,
+  "title": "Taylor Swift's Streaming Growth Across Eras",
+  "data": {
+    "url": "data/taylor_swift_discography_clean.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "release_date": "date:'%d/%m/%Y'"
+      }
+    }
+  },
+  "transform": [
+    {"filter": "datum.album_type == 'Original Studio'"},
+    {
+      "calculate": "toNumber(replace(replace(datum.spotify_streams, /\\./g, ''), /,/g, ''))",
+      "as": "streams_clean"
+    },
+    {
+      "aggregate": [
+        {"op": "sum", "field": "streams_clean", "as": "total_streams"},
+        {"op": "min", "field": "release_date",  "as": "release_date"}
+      ],
+      "groupby": ["album", "album_musical_genre"]
+    }
+  ],
+  "layer": [
+    {
+      "mark": {"type": "line", "strokeWidth": 2, "color": "#ccc"},
+      "encoding": {
+        "x": {
+          "field": "release_date",
+          "type": "temporal",
+          "axis": {"title": "Release Year", "format": "%Y", "labelAngle": -30}
+        },
+        "y": {
+          "field": "total_streams",
+          "type": "quantitative",
+          "axis": {
+            "title": "Total Spotify Streams (Billions)",
+            "labelExpr": "format(datum.value / 1000000000, '.1f') + 'B'"
+          }
+        }
+      }
+    },
+    {
+      "mark": {"type": "point", "size": 120, "filled": true},
+      "encoding": {
+        "x": {"field": "release_date", "type": "temporal"},
+        "y": {"field": "total_streams", "type": "quantitative"},
+        "color": {
+          "field": "album_musical_genre",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Country", "Country Pop", "Pop", "Electropop", "Indie Folk"],
+            "range": ["#8B6914", "#C8954A", "#C850C0", "#2E86AB", "#6BAB5E"]
+          },
+          "legend": {"title": "Genre Era"}
+        },
+        "tooltip": [
+          {"field": "album",               "type": "nominal",      "title": "Album"},
+          {"field": "release_date",        "type": "temporal",     "title": "Year", "format": "%Y"},
+          {"field": "album_musical_genre", "type": "nominal",      "title": "Genre Era"},
+          {"field": "total_streams",       "type": "quantitative", "title": "Total Streams", "format": ","}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "text", "dy": -14, "fontSize": 9, "fontStyle": "italic"},
+      "encoding": {
+        "x": {"field": "release_date", "type": "temporal"},
+        "y": {"field": "total_streams", "type": "quantitative"},
+        "text": {"field": "album", "type": "nominal"},
+        "color": {
+          "field": "album_musical_genre",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Country", "Country Pop", "Pop", "Electropop", "Indie Folk"],
+            "range": ["#8B6914", "#C8954A", "#C850C0", "#2E86AB", "#6BAB5E"]
+          }
+        }
+      }
+    }
+  ],
+  "config": {"view": {"stroke": null}}
+}

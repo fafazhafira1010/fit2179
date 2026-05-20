@@ -1,0 +1,50 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 360,
+  "height": 360,
+  "title": "Track Genre Distribution Across Taylor Swift's Discography",
+  "data": {
+    "url": "data/taylor_swift_discography_clean.csv",
+    "format": {"type": "csv"}
+  },
+  "transform": [
+    {
+      "calculate": "trim(datum.track_musical_genre)",
+      "as": "genre_clean"
+    },
+    {
+      "aggregate": [{"op": "count", "as": "track_count"}],
+      "groupby": ["genre_clean"]
+    }
+  ],
+  "mark": {"type": "arc", "innerRadius": 80, "outerRadius": 160},
+  "encoding": {
+    "theta": {
+      "field": "track_count",
+      "type": "quantitative"
+    },
+    "color": {
+      "field": "genre_clean",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "Country Pop", "Pop Rock", "Synth Pop", "Indie Folk",
+          "Electropop", "Indie Pop", "Pop", "Dance Pop",
+          "Folk Pop", "Country", "R&B", "Alternative Rock",
+          "Indie Rock", "Dream Pop", "Funk Pop"
+        ],
+        "range": [
+          "#C8954A","#E07B7B","#9B5DE5","#6BAB5E",
+          "#2E86AB","#F15BB5","#C850C0","#FEE440",
+          "#A9C46C","#8B6914","#FF6B6B","#4ECDC4",
+          "#45B7D1","#96CEB4","#aaa"
+        ]
+      },
+      "legend": {"title": "Genre"}
+    },
+    "tooltip": [
+      {"field": "genre_clean",  "type": "nominal",      "title": "Genre"},
+      {"field": "track_count",  "type": "quantitative", "title": "Number of Tracks"}
+    ]
+  }
+}

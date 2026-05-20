@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taylor Swift: 18 Years of Music & Tours</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.16.3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.24.0"></script>
+</head>
+<body>
+  <main class="page">
+
+    <!-- HERO -->
+    <header class="hero">
+      <p class="eyebrow">FIT2179 DV2 · Azhafira Y</p>
+      <h1>How did Taylor Swift become one of the biggest global artists ever?</h1>
+      <p class="subtitle">
+        From a 16-year-old country singer in 2006 to a global phenomenon in 2024 —
+        explore 18 years of musical evolution, world tours, and streaming dominance.
+      </p>
+    </header>
+
+    <!-- SECTION 1 -->
+    <section class="story-section">
+      <div class="section-header">
+        <h2>1. A career at a glance</h2>
+        <p>
+          Taylor Swift has released 11 original studio albums across 5 genre eras since 2006.
+          Each dot below is one album — coloured by its genre and sized by total Spotify streams.
+          The growth is hard to ignore.
+        </p>
+      </div>
+      <div id="timeline" class="vis vis-wide"></div>
+    </section>
+
+    <!-- SECTION 2 -->
+<section class="story-section">
+  <div class="section-header">
+    <h2>2. Always reinventing</h2>
+    <p>
+      Most artists stick to one sound. Taylor Swift has had five.
+      From Country to Pop to Indie Folk — her genre shifts kept fans guessing
+      and critics talking for nearly two decades.
+    </p>
+  </div>
+
+  <div class="chart-image-row">
+    <div id="genre_shift" class="vis"></div>
+    <div class="side-image">
+      <img src="images/Albums.webp" alt="Taylor Swift through the eras" />
+      <p class="image-caption">Taylor Swift albums across different eras</p>
+    </div>
+  </div>
+
+</section>
+
+    <!-- SECTION 3 -->
+    <section class="story-section">
+      <div class="section-header">
+        <h2>3. The songs everyone knows</h2>
+        <p>
+          Her biggest hits span multiple eras — proof that no single album defines her.
+          These are the 10 most-streamed Taylor Swift tracks on Spotify.
+        </p>
+      </div>
+      <div id="top10_songs" class="vis vis-wide"></div>
+    </section>
+
+    <!-- SECTION 4 -->
+    <section class="story-section">
+      <div class="section-header">
+        <h2>4. Taking over the world</h2>
+        <p>
+          Beyond the music, Taylor Swift's tours have reached 24 countries across 5 continents.
+          The map below shows where she performed and how much revenue each city generated.
+          Darker countries = more shows. Bigger dots = more revenue.
+        </p>
+      </div>
+      <div id="map" class="vis vis-wide"></div>
+    </section>
+
+  </main>
+  <script src="js/vega_lite_vis.js"></script>
+</body>
+</html>

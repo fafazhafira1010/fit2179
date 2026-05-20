@@ -1,0 +1,49 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 520,
+  "height": 320,
+  "title": "Top 10 Most-Streamed Taylor Swift Tracks",
+  "data": {
+    "url": "data/taylor_swift_discography_clean.csv",
+    "format": {
+      "type": "csv",
+      "parse": {"spotify_streams": "number"}
+    }
+  },
+  "transform": [
+    {
+      "aggregate": [
+        {"op": "max", "field": "spotify_streams",     "as": "total_streams"},
+        {"op": "min", "field": "album_musical_genre", "as": "era"}
+      ],
+      "groupby": ["track_name"]
+    },
+    {
+      "window": [{"op": "rank", "as": "rank"}],
+      "sort": [{"field": "total_streams", "order": "descending"}]
+    },
+    {"filter": "datum.rank <= 10"}
+  ],
+  "mark": {"type": "bar", "cornerRadiusEnd": 4, "color": "#C850C0"},
+  "encoding": {
+    "y": {
+      "field": "track_name",
+      "type": "nominal",
+      "sort": {"field": "total_streams", "order": "descending"},
+      "axis": {"title": null}
+    },
+    "x": {
+      "field": "total_streams",
+      "type": "quantitative",
+      "axis": {
+        "title": "Spotify Streams",
+        "labelExpr": "format(datum.value / 1000000, '.0f') + 'M'"
+      }
+    },
+    "tooltip": [
+      {"field": "track_name",    "type": "nominal",      "title": "Track"},
+      {"field": "total_streams", "type": "quantitative", "title": "Streams", "format": ","},
+      {"field": "era",           "type": "nominal",      "title": "Genre Era"}
+    ]
+  }
+}

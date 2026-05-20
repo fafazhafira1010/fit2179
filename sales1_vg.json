@@ -1,0 +1,95 @@
+// {
+//   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+//   "width": 700,
+//   "height": 350,
+//   "title": "Streaming vs Physical Sales Per Album",
+//   "data": {
+//     "url": "data/taylor_swift_discography_clean.csv",
+//     "format": {
+//       "type": "csv",
+//       "parse": {
+//         "release_date": "date:'%d/%m/%Y'"
+//       }
+//     }
+//   },
+//   "transform": [
+//     {"filter": "datum.album_type == 'Original Studio'"},
+//     {
+//       "calculate": "toNumber(replace(replace(datum.spotify_streams, /\\./g, ''), /,/g, ''))",
+//       "as": "streams_clean"
+//     },
+//     {
+//       "calculate": "toNumber(replace(replace(datum.album_physical_sales, /\\./g, ''), /,/g, ''))",
+//       "as": "sales_clean"
+//     },
+//     {
+//       "aggregate": [
+//         {"op": "sum", "field": "streams_clean", "as": "total_streams"},
+//         {"op": "max", "field": "sales_clean",   "as": "physical_sales"},
+//         {"op": "min", "field": "release_date",  "as": "release_date"}
+//       ],
+//       "groupby": ["album", "album_musical_genre"]
+//     }
+//   ],
+//   "resolve": {"scale": {"y": "independent"}},
+//   "layer": [
+//     {
+//       "mark": {
+//         "type": "bar",
+//         "color": "#C850C0",
+//         "opacity": 0.65,
+//         "cornerRadiusTopLeft": 3,
+//         "cornerRadiusTopRight": 3
+//       },
+//       "encoding": {
+//         "x": {
+//           "field": "album",
+//           "type": "nominal",
+//           "sort": {"field": "release_date", "order": "ascending"},
+//           "axis": {"title": "Album", "labelAngle": -30, "labelLimit": 140}
+//         },
+//         "y": {
+//           "field": "total_streams",
+//           "type": "quantitative",
+//           "axis": {
+//             "title": "Total Spotify Streams (Billions)",
+//             "titleColor": "#C850C0",
+//             "labelExpr": "format(datum.value / 1000000000, '.1f') + 'B'"
+//           }
+//         },
+//         "tooltip": [
+//           {"field": "album",         "type": "nominal",      "title": "Album"},
+//           {"field": "total_streams", "type": "quantitative", "title": "Spotify Streams", "format": ","}
+//         ]
+//       }
+//     },
+//     {
+//       "mark": {
+//         "type": "line",
+//         "color": "#E6A817",
+//         "strokeWidth": 2.5,
+//         "point": {"filled": true, "size": 70, "color": "#E6A817"}
+//       },
+//       "encoding": {
+//         "x": {
+//           "field": "album",
+//           "type": "nominal",
+//           "sort": {"field": "release_date", "order": "ascending"}
+//         },
+//         "y": {
+//           "field": "physical_sales",
+//           "type": "quantitative",
+//           "axis": {
+//             "title": "Physical Album Sales (Millions)",
+//             "titleColor": "#E6A817",
+//             "labelExpr": "format(datum.value / 1000000, '.1f') + 'M'"
+//           }
+//         },
+//         "tooltip": [
+//           {"field": "album",          "type": "nominal",      "title": "Album"},
+//           {"field": "physical_sales", "type": "quantitative", "title": "Physical Sales", "format": ","}
+//         ]
+//       }
+//     }
+//   ]
+// }
